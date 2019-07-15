@@ -1,6 +1,7 @@
 # Site settings 配置站点
 title: '程序媛自high圣地'
 description: '博客内容有技术总结、有调研分析、有随笔、有追星，圈地自high专用(๑•̀ㅂ•́)و✧'
+header-img: assets/img/hero.jpg
 keyword: '架构, lego'
 url: '' # your host
 
