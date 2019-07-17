@@ -34,7 +34,7 @@ ADD 20, 7, result
 PUSH result
 ```
 
-![stack_based](2017_08_13_Stack_based_vs_Register_based_VM/Figure_1_stack_based.png)
+![stack_based](http://jinluzhang.github.io/assets/posts_img/2017_08_13_Stack_based_vs_Register_based_VM/Figure_1_stack_based.png)
 
 因为需要push和pop，执行加法操作需要四行指令。
 
@@ -52,7 +52,7 @@ Stack based的一个优点是操作数由SP隐含寻址，VM不需要明确知�
 ADD R1, R2, R3 ;        # Add contents of R1 and R2, store result in R3
 ```
 
-![register_based](2017_08_13_Stack_based_vs_Register_based_VM/Figure_register_based.png)
+![register_based](http://jinluzhang.github.io/assets/posts_img/2017_08_13_Stack_based_vs_Register_based_VM/Figure_register_based.png)
 
 由于没有push和pop操作，所以指令只有一条；但是我们需要额外指定操作数地址R1 R2 R3。
 
@@ -73,9 +73,7 @@ lopcodes.h           /Users/zhangjinlu/env/origin_source/lua-5.3.0/src/lopcodes.
 
 enum OpMode {iABC, iABx, iAsBx, iAx};
 
-![OpMode](2017_08_13_Stack_based_vs_Register_based_VM/Figure_3_lua_op.png)
-
- 
+![OpMode](http://jinluzhang.github.io/assets/posts_img/2017_08_13_Stack_based_vs_Register_based_VM/Figure_3_lua_op.png)
 
  'A' : 8 bits
 
@@ -91,9 +89,9 @@ enum OpMode {iABC, iABx, iAsBx, iAx};
 
 它们用来存放 寄存器id、常量表id、upvalue id
 
-![op-1](2017_08_13_Stack_based_vs_Register_based_VM/Figure_4_a.png)
+![op-1](http://jinluzhang.github.io/assets/posts_img/2017_08_13_Stack_based_vs_Register_based_VM/Figure_4_a.png)
 
-![op-2](2017_08_13_Stack_based_vs_Register_based_VM/Figure_4_b.png)
+![op-2](http://jinluzhang.github.io/assets/posts_img/2017_08_13_Stack_based_vs_Register_based_VM/Figure_4_b.png)
 
  
 

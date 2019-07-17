@@ -3,6 +3,7 @@ layout: post
 title: '萨提亚·纳德拉 & 微软'
 date: 2019-05-29
 categories: 调研
+cover: 'http://jinluzhang.github.io/assets/posts_img/2019-05-29-Microsoft-Nadella/Figure_2_market_cap.png'
 author: Beaug
 tags: 萨提亚·纳德拉 微软
 ---
@@ -19,11 +20,11 @@ tags: 萨提亚·纳德拉 微软
 
 最近微软市值重回巅峰，全球排名第一，增长曲线陡峭：
 
-![image.png](2019-05-29-Microsoft-Nadella/Figure_1_worth.png)
+![image.png](http://jinluzhang.github.io/assets/posts_img/2019-05-29-Microsoft-Nadella/Figure_1_worth.png)
 
 （ [视频：1997~2019 全球十大公司市值排名变化](https://www.bilibili.com/video/av50933659?from=search&seid=17031773284162233526)）
 
-![image.png](2019-05-29-Microsoft-Nadella/Figure_2_market_cap.png)
+![image.png](http://jinluzhang.github.io/assets/posts_img/2019-05-29-Microsoft-Nadella/Figure_2_market_cap.png)
 
 （两根红线分别是鲍尔默上任和纳德拉上任时间点。数据来源：https://ycharts.com/companies/MSFT/market_cap）
 
@@ -112,11 +113,11 @@ tags: 萨提亚·纳德拉 微软
 
 Microsoft有个戏谑的缩写：M$。营收能力一直是在持续稳步增长的：
 
-![image.png](2019-05-29-Microsoft-Nadella/Figure_3_yearly_revenue.png)
+![image.png](http://jinluzhang.github.io/assets/posts_img/2019-05-29-Microsoft-Nadella/Figure_3_yearly_revenue.png)
 
 但营收来源固定，基本没有新增长引擎： 
 
-![mcrsft.jpg](2019-05-29-Microsoft-Nadella/Figure_4_revenue_segment.jpg)
+![mcrsft.jpg](http://jinluzhang.github.io/assets/posts_img/2019-05-29-Microsoft-Nadella/Figure_4_revenue_segment.jpg)
 
 以2009财年Segment revenue为例：（[financial review | Notes | segment Infomation & Geo](https://www.microsoft.com/investor/reports/ar09/10k_fr_not_21.html)）
 
@@ -231,7 +232,7 @@ Windows操作系统在个人电脑中占绝对垄断地位（Market Share=88%）
 
 # 3. 看现在--Satya Nadella
 
-![-](2019-05-29-Microsoft-Nadella/Figure_5_Nadella.jpg)
+![-](http://jinluzhang.github.io/assets/posts_img/2019-05-29-Microsoft-Nadella/Figure_5_Nadella.jpg)
 
 萨提亚·纳德拉1967年于印度的海德拉巴德出生，在印度班加罗尔大学获得了电子和通信的工程学士学位，随后前往美国威斯康辛大学攻读计算机硕士。
 
@@ -302,7 +303,7 @@ Windows服务器和数据库是这个部门的主要盈利来源，而云业务�
 
 **市场占有率**也在稳步提升：
 
-![img](2019-05-29-Microsoft-Nadella/Figure_6_market_share.png)
+![img](http://jinluzhang.github.io/assets/posts_img/2019-05-29-Microsoft-Nadella/Figure_6_market_share.png)
 
 
 
@@ -360,7 +361,7 @@ Windows服务器和数据库是这个部门的主要盈利来源，而云业务�
 
 **部门营收：**
 
-![image.png](2019-05-29-Microsoft-Nadella/Figure_7_2018_segment_revenue.png)
+![image.png](http://jinluzhang.github.io/assets/posts_img/2019-05-29-Microsoft-Nadella/Figure_7_2018_segment_revenue.png)
 
 
 
@@ -416,7 +417,7 @@ We as a company stand for deeply understanding the needs of customers, translati
 
 这是纳德拉上任第一年给自己列的优先级清单，第一是重新定义使命，第二是自上而下驱动文化变革。
 
-![image.png](2019-05-29-Microsoft-Nadella/Figure_8_hit_refresh.png)
+![image.png](http://jinluzhang.github.io/assets/posts_img/2019-05-29-Microsoft-Nadella/Figure_8_hit_refresh.png)
 
 
 
@@ -482,4 +483,4 @@ Scott Guthrie 被提名为为执行副总裁，领导云和企业服务部门。
 
 微软内部是各自占山为王，互相拿着枪指着对方，军阀作风深入骨髓。
 
-![4jbwhxj6372oi28u.png!1200](2019-05-29-Microsoft-Nadella/Figure_9_comic.png)
+![4jbwhxj6372oi28u.png!1200](http://jinluzhang.github.io/assets/posts_img/2019-05-29-Microsoft-Nadella/Figure_9_comic.png)
