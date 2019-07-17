@@ -135,7 +135,7 @@ ZK Event有如下6种，我们将测试前4种：
 
 测试数据结构为：
 
-![zk-tree.png](assets/posts_img/2017-09-04-ZK_Watcher_test/Figure_1_zk_test.png)
+![zk-tree.png](http://jinluzhang.github.io/assets/posts_img/2017-09-04-ZK_Watcher_test/Figure_1_zk_test.png)
 
 观测节点均为appKey_A节点，测试步骤及结果见下表：
 
