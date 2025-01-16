@@ -1,0 +1,47 @@
+---
+layout: post
+title: '运筹学学习笔记'
+cover: 'http://jinluzhang.github.io/assets/posts_img/2023-12-01-OR/OR5.jpg'
+date: 2023-12-01
+categories: 调研
+author: Beaug
+tags: spec
+---
+
+学运筹时候的笔记，都是一些基础知识，主要扫描存起来备忘，以及显摆一下我字真好看。
+
+
+
+![图1](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR1.jpg)
+
+![图2](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR2.jpg)
+
+![图3](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR3.jpg)
+
+![图4](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR4.jpg)
+
+![图5](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR5.jpg)
+
+![图6](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR6.jpg)
+
+![图7](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR7.jpg)
+
+![图8](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR8.jpg)
+
+![图9](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR9.jpg)
+
+![图10](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR10.jpg)
+
+![图11](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR11.jpg)
+
+![图12](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR12.jpg)
+
+![图13](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR13.jpg)
+
+![图14](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR14.jpg)
+
+![图15](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR15.jpg)
+
+![图16](http://jinluzhang.github.io/assets/posts_img/2023-08-02-LLAMA2-code/OR16.jpg)
+
+
