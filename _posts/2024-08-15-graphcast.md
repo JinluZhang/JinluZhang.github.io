@@ -16,9 +16,9 @@ tags: 预测 GNN
 
  - GraphCast的图结构设计很有意思，点和边是两套东西。点是0.25°经纬度的正方形共721×1440=1,038,240个。但点之间的连接关系并不是按相邻关系定义的，而是构建了multi-mesh，通过把地球表面划分成二十面体，然后再做每个面的三角形一拆四，这样细拆下去6层，共拆出40,962个multi-mesh节点。具有属性的node直接的连接关系，是通过和multi-mesh节点做映射得到的。这么设计的重要原因之一是在真实世界，ERA5等天气数据集就是用0.25°经纬度粒度来记录天气数据的。
 
- - GraphCast中对GNN & Transformer有一段很有意思的洞见：Transformers结构构建了输入token之间all-to-all的连接关系，类比token是node，图是全连接图。在长文本Transformer框架里，会通过稀疏化链接的方式，来减少计算量，这个结构就与GNN很类似了。【A key advantage of GNNs is that the input graph’s structure determines what parts of the rep- resentation interact with one another via learned message-passing, allowing arbitrary patterns of spatial interactions over any range. By contrast, a convolutional neural network (CNN) is restricted to computing interactions within local patches (or, in the case of dilated convolution, over regularly strided longer ranges). And while Transformers (43) can also compute arbitrarily long-range computations, they do not scale well with very large inputs (e.g., the 1 million-plus grid points in GraphCast’s global inputs) because of the quadratic memory complexity induced by computing all-to-all interactions. Contemporary extensions of Transformers often sparsify possible interactions to reduce the complexity, which in effect makes them analogous to GNNs (e.g., graph attention networks (44)).】
+ - GraphCast中对GNN & Transformer有一段很有意思的洞见：Transformers结构构建了输入token之间all-to-all的连接关系，类比token是node，图是全连接图。从“定义连接关系”这个视角出发，GNN是灵活性更高的方式，只要想，我们可以在全局任意构建两个node之间的边，但它也带来了代价，就是图的存储、在图上做信息传播，这些的效率都不高。而经典Transformer框架中潜在的连接关系的全连接图，好处是简单，缺点的过于密集的连接带来了过高的计算量，限制了node数量，即在Transformer语境里的context length。长文本Transformer框架是个折中，会构建稀疏化链接，它不像GNN的图定义那么灵活，也减少了经典Transformer的连接密度。而在计算方式上，就没什么区别了，GNN上也能做Attention计算。【A key advantage of GNNs is that the input graph’s structure determines what parts of the rep- resentation interact with one another via learned message-passing, allowing arbitrary patterns of spatial interactions over any range. By contrast, a convolutional neural network (CNN) is restricted to computing interactions within local patches (or, in the case of dilated convolution, over regularly strided longer ranges). And while Transformers (43) can also compute arbitrarily long-range computations, they do not scale well with very large inputs (e.g., the 1 million-plus grid points in GraphCast’s global inputs) because of the quadratic memory complexity induced by computing all-to-all interactions. Contemporary extensions of Transformers often sparsify possible interactions to reduce the complexity, which in effect makes them analogous to GNNs (e.g., graph attention networks (44)).】
 
-
+- 2024年5月的GenCast基本延续了GraphCast的结构，有两点区别：迭代生成未来T步的输出，用了条件Diffusion；原本只用了MLP，现在改成了Graph Transformer。
 
 # GraphCast
 
@@ -73,6 +73,8 @@ GraphCast使用的坐标系统并没有特殊性，可以根据特定的应用�
 
 ### 3.2 Architecture overview
 
+![Architecture](http://jinluzhang.github.io/assets/posts_img/2024-08-15-graphcast/graphcast1.png)
+
 GraphCast是基于图神经网络（GNN）实现的，采用“编码-处理-解码”（encode-process-decode）配置（如图1d, e, f所示）。在该配置中，编码器将输入的纬度-经度网格上的地面和大气特征映射到一个multi-mesh上，处理器在该multi-mesh上执行多轮消息传递，解码器则将multi-mesh特征映射回输出的纬度-经度网格。
 
 基于GNN的学习模拟器在学习流体和其他材料的复杂物理动态方面非常有效（18, 19），因为它们的表示和计算结构类似于学习的有限元求解器（20）。GNN的一个关键优势是，输入图的结构决定了表示的哪些部分通过学习的消息传递相互作用，从而能够在任意范围内进行空间交互。相比之下，卷积神经网络（CNN）仅限于计算局部区域内的交互（或者在膨胀卷积的情况下，计算规则步长的长范围交互）。虽然Transformers（43）也能进行任意长范围的计算，但由于计算所有交互时引发的二次内存复杂度，它们在处理非常大的输入时（例如GraphCast的全球输入，包含超过100万个网格点）无法良好扩展。现代的Transformers扩展通常通过稀疏化可能的交互来减少复杂度，这实际上使得它们类似于GNN（例如，图注意力网络（44））。
@@ -119,9 +121,58 @@ unidirectional edges that connect sender mesh nodes to receiver grid nodes.
  This results on a total of 3,114,720 Mesh2Grid edges (3 mesh nodes connected to each of the 721 × 1440 latitude-longitude grid points), each with 4 input features.
 
 
-### 3.4 Encoder
+### 3.4 Encoder/Processor/Decoder
 
-首先通过五个多层感知机（MLP）将3.3中5种点/边的特征嵌入到固定大小的潜在空间中。
+Encoder首先通过五个多层感知机（MLP）将3.3中5种点/边的特征embed到latent space中。然后，用interaction network，就是MLP，把grid node信息传递到它的出边Grid2Mesh，再传递给mesh node。
+
+Processor只处理mesh nodes和mesh edges，单层是一个标准的交互网络（Interaction Network）（17, 46），它首先使用相邻节点的信息更新每个网格边；然后，它通过聚合所有到达该网格节点的边的信息来更新每个网格节点；更新完这两个元素后，表示将通过残差连接更新，并且为了简化符号，也会将变量重新分配。一共有16层。
+
+Decoder与Encoder类似，两次消息传递，把mesh node的信息传回给grid node。
+
+最后Output层是个MLP，把grid node上的信息映射成输出。
+
+GraphCast 中的神经网络全部是 MLP，每个 MLP 都有一个隐藏层，隐藏层和输出层的大小为512（除了解码器的最终层，其输出大小为227，匹配每个网格节点的预测变量数）。在 GNN 中使用单层隐藏层的 MLP 是一种常见做法，因为常规经验和我们自己的实验表明，增加消息传递的层数并减少 MLP 的深度效果最好。初步实验表明，MLP 深度的变化支持这一选择
+
+### 3.5 Training objective
+
+就是MSE
+
+![Loss](http://jinluzhang.github.io/assets/posts_img/2024-08-15-graphcast/graphcast_loss.png)
+
+
+# GenhCast
+
+## 1.简介
+
+是在GraphCast基础上，2024年5月发表的新进展。
+
+传统的天气预报基于数值天气预报（NWP）算法，这些算法大致解算了大气动力学的方程。确定性NWP方法将当前的天气估算映射到一个未来天气将如何展开的预报上。这个单一的预报只是其中的一种可能性，因此，为了建模不同未来天气情景的概率分布（Kalnay，2003；Palmer和Hagedorn，2006），气象机构越来越依赖于“集成预报”，生成多个基于NWP的预报，每个预报模拟一个单一的可能情景（ECMWF，2019；Palmer，2019；Roberts等，2023；Yamaguchi等，2018；Zhu等，2012b）。欧洲中期天气预报中心（ECMWF）的ENS（ECMWF，2019）是ECMWF广泛集成预报系统（IFS）中的最先进的基于NWP的集成预报，将取代其确定性预报HRES（ECMWF，2024）。虽然ENS和其他基于NWP的集成预报在建模天气分布方面非常有效，但它们仍然容易出错，运行速度较慢，并且需要大量工程工作。
+
+近年来，基于机器学习（ML）的天气预报（MLWP）方法提供了NWP方法的替代方案，并已证明在非概率性预报方面提供了更高的准确性和效率（Bi等，2023；Chen等，2023；Keisler，2022；Kurth等，2022；Lam等，2023；Li等，2023；Nguyen等，2023）。这些方法通常侧重于预测可能轨迹的平均值，而相对较少强调量化预报的不确定性。它们通常训练以最小化均方误差（MSE），因此在较长的提前时间内，往往会产生模糊的预报状态，而不是可能的特定天气状态的实现（Lam等，2023）。也有一些有限的尝试，试图使用传统的初始条件扰动方法来生成基于MLWP的集成预报（Bi等，2023；Kurth等，2022；Li等，2023），但它们没有解决模糊问题，也未能与像ENS这样的操作集成预报相媲美。一个例外是Neural GCM（Kochkov等，2023），这是一种混合NWP-MLWP方法，结合了传统NWP的动力学核心和局部基于ML的参数化，显示出与操作集成预报竞争的表现。然而，它的集成预报分辨率为1.4°，比操作NWP预报的分辨率低一个数量级，并且在扩展到操作环境时面临严重的挑战。
+
+## 2. GenCast
+
+在这里，我们介绍了一种概率性天气模型——GenCast——它生成0.25°分辨率的全球15天集成预报，首次比世界顶级的操作集成系统——ECMWF的ENS更准确。生成一个单一的15天GenCast预报大约需要8分钟，且多个预报可以并行生成。
+
+GenCast建模了未来天气状态 𝑋𝑡+1 的条件概率分布 𝑝(𝑋𝑡+1∣𝑋𝑡,𝑋𝑡−1)，即在当前和前一天气状态的条件下预测未来天气状态。一个长度为 𝑇 的预报轨迹 通过对初始和前一状态的条件建模，并对后续状态的联合分布进行因子分解来建模，每一步都是自回归采样的。
+
+GenCast实现为条件扩散模型conditional diffusion model（Karras等，2022；Sohl-Dickstein等，2015；Song等，2021），这是一种生成型机器学习模型，用于从给定的数据分布中生成新样本，支撑了近年来在自然图像、声音和视频建模方面的许多进展，统称为“生成性AI”（Croitoru等，2023；Yang等，2023）。扩散模型通过迭代细化过程工作。未来的大气状态 𝑋𝑡+1 是通过迭代细化一个完全从噪声初始化的候选状态 𝑍𝑡+1 来产生的，并且它受前两个大气状态 𝑋𝑡,𝑋𝑡−1 的条件限制。图1中的蓝色框显示了如何从初始条件生成第一步预报，以及如何自回归地生成完整轨迹。由于每个时间步的预报都是以噪声（即 𝑍𝑡+1）初始化的，因此可以通过不同的噪声样本重复此过程，从而生成一组轨迹。有关详细信息，请参见D.1部分。
+
+在每个迭代细化阶段，GenCast应用了一个由编码器、处理器和解码器组成的神经网络架构。编码器组件将输入 𝑍𝑡+1 以及条件 𝑋𝑡,𝑋𝑡−1 从本地经纬度网格映射到一个在6次细化的二十面体网格上的内部学习表示。处理器组件是一个graph
+transformer（Vaswani等，2017），其中每个节点都关注其k-hop邻域。解码器组件将内部网格表示映射回经纬度网格上。
+
+GenCast的训练使用了40年ERA5重分析数据（Hersbach等，2020），涵盖1979年至2018年，使用标准的扩散模型去噪目标（Karras等，2022）。至关重要的是，虽然我们只在单步预测任务上直接训练GenCast，但它可以自回归地展开生成15天的集成预报。D部分提供了GenCast架构和训练协议的完整细节。
+
+在评估GenCast时，我们使用ERA5重分析数据初始化它，并结合来自ERA5数据同化集成（EDA）的扰动（Isaksen等，2010），这些扰动反映了初始条件的不确定性。更多细节见C部分。
+
+![arch](http://jinluzhang.github.io/assets/posts_img/2024-08-15-graphcast/gencast1.png)
+
+
+## 3. 一些模型细节
+
+扩散模型的核心是噪声的加入与去除，噪声来自于某个分布 𝑝𝑛𝑜𝑖𝑠𝑒(·|𝜎)，其中 𝜎 是噪声级别。在使用扩散生成自然图像时（Ho 等，2020），通常选择 i.i.d. 高斯分布作为噪声分布，扩散模型的早期理论大多是基于高斯白噪声的情况开发的。在球面上进行白噪声过程时，它是各向同性的或旋转不变的，其特征是其球面调和谱在期望上是平坦的。然而，如果我们尝试通过在等纬度-经度网格的格点上采样 i.i.d. 噪声来在有限分辨率下近似它，那么这些性质将不再成立。这是因为接近极点的格点密度更大，导致球面调和域中的高频分量增多。
+
+在实证上，我们发现这并不是一个致命的问题；然而，我们发现通过采用一种对球面几何敏感的噪声采样方法，能够获得一些小但一致的改进。我们在球面调和域中采样各向同性的高斯噪声，其期望的功率谱在我们的网格能够分辨的波数范围内是平坦的，之后被截断。然后，我们使用逆球面调和变换（Driscoll 和 Healy，1994）将其投影到离散网格上。得到的每个网格单元的噪声值并非独立，尤其是接近极点时，但在赤道处的分辨率下，它们近似独立，且显示出各向同性和平坦的功率谱。
 
 
 
