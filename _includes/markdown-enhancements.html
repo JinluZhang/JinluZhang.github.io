@@ -15,3 +15,14 @@
 {%- if __return == true -%}
   {%- include markdown-enhancements/mermaid.html -%}
 {%- endif -%}
+
+<script type="text/x-mathjax-config">
+        var _config = { tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']]
+        }};
+        {%- if _mathjax_autoNumber == true -%}
+                _config.TeX = { equationNumbers: { autoNumber: "all" } };
+        {%- endif -%}
+        MathJax.Hub.Config(_config);
+</script>
+<script type="text/javascript" src="{{ _sources.mathjax }}" async></script>
