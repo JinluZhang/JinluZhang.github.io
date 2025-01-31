@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: 'GraphCast/GenCast学习笔记'
 date: 2024-08-15
 categories: 预测

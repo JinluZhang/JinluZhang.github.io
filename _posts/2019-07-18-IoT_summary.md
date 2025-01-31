@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: 'IoT学习笔记'
 cover: 'http://jinluzhang.github.io/assets/posts_img/2019-07-18-IoT_summary/image-20190718144444613.png'
 date: 2019-07-18
