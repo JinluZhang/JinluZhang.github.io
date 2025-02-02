@@ -1,5 +1,4 @@
 ---
-layout: page
 title: '肿么写spec文件'
 date: 2016-03-15
 categories: 技术

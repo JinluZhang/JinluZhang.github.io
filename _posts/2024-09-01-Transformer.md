@@ -1,5 +1,4 @@
 ---
-layout: page
 title: 'Transformer代码实现详解'
 date: 2024-09-01
 categories: 技术

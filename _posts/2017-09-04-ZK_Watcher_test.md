@@ -1,5 +1,4 @@
 ---
-layout: page
 title: 'ZK Watcher触发条件全测试'
 date: 2017-09-04
 categories: 技术

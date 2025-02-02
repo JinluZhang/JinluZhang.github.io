@@ -1,5 +1,4 @@
 ---
-layout: page
 title: 开源调研
 date: 2019-05-13
 categories: 调研
