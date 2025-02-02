@@ -163,3 +163,8 @@ html,
     padding-top: map-get($layout, header-height);
   }
 }
+
+.page__img {
+  max-width: 80%;
+  height: auto;
+}
