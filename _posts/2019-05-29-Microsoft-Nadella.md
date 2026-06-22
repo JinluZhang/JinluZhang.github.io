@@ -1,5 +1,4 @@
 ---
-layout: post
 title: '萨提亚·纳德拉 & 微软'
 date: 2019-05-29
 categories: 调研

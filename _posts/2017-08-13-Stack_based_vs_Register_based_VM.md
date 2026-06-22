@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Stack based vs. Register based VM
 date: 2017-08-13
 categories: 技术
