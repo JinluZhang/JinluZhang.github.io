@@ -1,0 +1,172 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B1020"/>
+      <stop offset="0.55" stop-color="#101827"/>
+      <stop offset="1" stop-color="#07151A"/>
+    </linearGradient>
+    <linearGradient id="stage1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5EEAD4"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="stage2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A7F3D0"/>
+      <stop offset="1" stop-color="#22C55E"/>
+    </linearGradient>
+    <linearGradient id="stage3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FDE68A"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+    <linearGradient id="stage4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F0ABFC"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.25 0 0 0 0 0.85 0 0 0 0 0.95 0 0 0 0.45 0"/>
+      <feBlend in="SourceGraphic" mode="screen"/>
+    </filter>
+    <marker id="arrow" markerWidth="18" markerHeight="18" refX="15" refY="9" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2L16 9L2 16L6 9L2 2Z" fill="#E5E7EB"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="18" markerHeight="18" refX="15" refY="9" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2L16 9L2 16L6 9L2 2Z" fill="#67E8F9"/>
+    </marker>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size: 48px; font-weight: 800; fill: #F8FAFC; letter-spacing: 0; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size: 23px; font-weight: 500; fill: #CBD5E1; letter-spacing: 0; }
+      .stage-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size: 30px; font-weight: 800; fill: #FFFFFF; letter-spacing: 0; }
+      .stage-subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size: 18px; font-weight: 600; fill: rgba(255,255,255,0.86); letter-spacing: 0; }
+      .body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size: 18px; font-weight: 500; fill: #D8DEE9; letter-spacing: 0; }
+      .small { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size: 15px; font-weight: 500; fill: #AAB6C5; letter-spacing: 0; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size: 16px; font-weight: 700; fill: #E2E8F0; letter-spacing: 0; }
+      .metric { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size: 24px; font-weight: 800; fill: #F8FAFC; letter-spacing: 0; }
+      .metric-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size: 14px; font-weight: 600; fill: #94A3B8; letter-spacing: 0; }
+      .chip { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; font-size: 15px; font-weight: 700; fill: #DFF7FF; letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <path d="M95 122C292 28 477 64 625 145C814 248 900 141 1071 91C1213 50 1371 70 1510 156" stroke="#1F3B57" stroke-width="2" opacity="0.5"/>
+  <path d="M98 866C311 773 451 834 612 895C774 956 898 882 1058 812C1240 732 1389 801 1510 877" stroke="#1F3B57" stroke-width="2" opacity="0.45"/>
+
+  <text x="92" y="96" class="title">OpenClaw 商家端 Agent 质量闭环</text>
+  <text x="94" y="139" class="subtitle">开发准入评测 -> 线上真实对话评测 -> 运行监控告警 -> BadCase 回流治理</text>
+
+  <g transform="translate(615 330)" filter="url(#softGlow)">
+    <circle cx="185" cy="185" r="166" fill="rgba(15,23,42,0.78)" stroke="#67E8F9" stroke-width="2.5"/>
+    <circle cx="185" cy="185" r="118" fill="rgba(8,13,25,0.82)" stroke="#334155"/>
+    <text x="185" y="154" text-anchor="middle" class="stage-title">质量闭环</text>
+    <text x="185" y="192" text-anchor="middle" class="body">用评测发现问题</text>
+    <text x="185" y="224" text-anchor="middle" class="body">用监控定位问题</text>
+    <text x="185" y="256" text-anchor="middle" class="body">用回流持续修复</text>
+  </g>
+
+  <path d="M500 291C604 198 758 171 900 213" stroke="#E5E7EB" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M1113 371C1190 495 1164 653 1049 742" stroke="#E5E7EB" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M911 812C759 861 600 816 501 704" stroke="#E5E7EB" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M374 611C311 482 345 348 455 259" stroke="#E5E7EB" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+  <g transform="translate(116 205)" filter="url(#shadow)">
+    <rect x="0" y="0" width="420" height="260" rx="30" fill="rgba(15,23,42,0.94)" stroke="rgba(94,234,212,0.55)" stroke-width="2"/>
+    <rect x="0" y="0" width="420" height="86" rx="30" fill="url(#stage1)"/>
+    <text x="34" y="52" class="stage-title">1. 开发准入评测</text>
+    <text x="34" y="116" class="stage-subtitle">SKILL 评测平台 | 线下</text>
+    <text x="34" y="153" class="body">准入评测、路由回测、冲突分析</text>
+    <text x="34" y="184" class="body">SKILL 仓库、断言、数据集治理</text>
+    <g transform="translate(34 210)">
+      <rect width="105" height="34" rx="17" fill="rgba(14,165,233,0.18)" stroke="#38BDF8"/>
+      <text x="52.5" y="23" text-anchor="middle" class="chip">46 managed</text>
+      <rect x="118" width="100" height="34" rx="17" fill="rgba(20,184,166,0.18)" stroke="#2DD4BF"/>
+      <text x="168" y="23" text-anchor="middle" class="chip">31 断言</text>
+      <rect x="231" width="122" height="34" rx="17" fill="rgba(99,102,241,0.18)" stroke="#818CF8"/>
+      <text x="292" y="23" text-anchor="middle" class="chip">49 次回测</text>
+    </g>
+  </g>
+
+  <g transform="translate(1064 205)" filter="url(#shadow)">
+    <rect x="0" y="0" width="420" height="260" rx="30" fill="rgba(15,23,42,0.94)" stroke="rgba(134,239,172,0.55)" stroke-width="2"/>
+    <rect x="0" y="0" width="420" height="86" rx="30" fill="url(#stage2)"/>
+    <text x="34" y="52" class="stage-title">2. 线上对话评测</text>
+    <text x="34" y="116" class="stage-subtitle">真实用户 query | 线上</text>
+    <text x="34" y="153" class="body">对话采集、任务完成率、BadCase 归因</text>
+    <text x="34" y="184" class="body">案例库、任务集、评估运行、下钻复核</text>
+    <g transform="translate(34 210)">
+      <rect width="132" height="34" rx="17" fill="rgba(34,197,94,0.18)" stroke="#86EFAC"/>
+      <text x="66" y="23" text-anchor="middle" class="chip">12,234 对话</text>
+      <rect x="145" width="116" height="34" rx="17" fill="rgba(34,197,94,0.18)" stroke="#86EFAC"/>
+      <text x="203" y="23" text-anchor="middle" class="chip">100 品牌</text>
+      <rect x="274" width="104" height="34" rx="17" fill="rgba(34,197,94,0.18)" stroke="#86EFAC"/>
+      <text x="326" y="23" text-anchor="middle" class="chip">64.4%</text>
+    </g>
+  </g>
+
+  <g transform="translate(1064 665)" filter="url(#shadow)">
+    <rect x="0" y="0" width="420" height="260" rx="30" fill="rgba(15,23,42,0.94)" stroke="rgba(253,186,116,0.58)" stroke-width="2"/>
+    <rect x="0" y="0" width="420" height="86" rx="30" fill="url(#stage3)"/>
+    <text x="34" y="52" class="stage-title">3. 运行监控告警</text>
+    <text x="34" y="116" class="stage-subtitle">监控平台 | 生产运行</text>
+    <text x="34" y="153" class="body">沙箱、Cron、Skill 调用、对话质量</text>
+    <text x="34" y="184" class="body">日志、基础监控、告警、成本与耗时</text>
+    <g transform="translate(34 210)">
+      <rect width="120" height="34" rx="17" fill="rgba(249,115,22,0.18)" stroke="#FDBA74"/>
+      <text x="60" y="23" text-anchor="middle" class="chip">216 沙箱</text>
+      <rect x="133" width="128" height="34" rx="17" fill="rgba(249,115,22,0.18)" stroke="#FDBA74"/>
+      <text x="197" y="23" text-anchor="middle" class="chip">17,119 query</text>
+      <rect x="274" width="104" height="34" rx="17" fill="rgba(249,115,22,0.18)" stroke="#FDBA74"/>
+      <text x="326" y="23" text-anchor="middle" class="chip">747 告警</text>
+    </g>
+  </g>
+
+  <g transform="translate(116 665)" filter="url(#shadow)">
+    <rect x="0" y="0" width="420" height="260" rx="30" fill="rgba(15,23,42,0.94)" stroke="rgba(216,180,254,0.58)" stroke-width="2"/>
+    <rect x="0" y="0" width="420" height="86" rx="30" fill="url(#stage4)"/>
+    <text x="34" y="52" class="stage-title">4. BadCase 回流治理</text>
+    <text x="34" y="116" class="stage-subtitle">治理清单 | 负责人闭环</text>
+    <text x="34" y="153" class="body">真实失败样本回流数据集和断言</text>
+    <text x="34" y="184" class="body">修 SKILL.md、边界、流程和工具稳定性</text>
+    <g transform="translate(34 210)">
+      <rect width="118" height="34" rx="17" fill="rgba(168,85,247,0.18)" stroke="#D8B4FE"/>
+      <text x="59" y="23" text-anchor="middle" class="chip">FN 治理</text>
+      <rect x="131" width="128" height="34" rx="17" fill="rgba(168,85,247,0.18)" stroke="#D8B4FE"/>
+      <text x="195" y="23" text-anchor="middle" class="chip">冲突治理</text>
+      <rect x="272" width="108" height="34" rx="17" fill="rgba(168,85,247,0.18)" stroke="#D8B4FE"/>
+      <text x="326" y="23" text-anchor="middle" class="chip">回归验证</text>
+    </g>
+  </g>
+
+  <g transform="translate(578 166)">
+    <rect x="0" y="0" width="444" height="86" rx="22" fill="rgba(2,6,23,0.72)" stroke="#334155"/>
+    <text x="28" y="34" class="label">路由质量现状</text>
+    <text x="28" y="65" class="body">最近回测：489 用例，TP 416，FN 73，FP 0，F1 91.93%</text>
+  </g>
+
+  <g transform="translate(578 760)">
+    <rect x="0" y="0" width="444" height="100" rx="22" fill="rgba(2,6,23,0.72)" stroke="#334155"/>
+    <text x="28" y="34" class="label">治理主矛盾</text>
+    <text x="28" y="65" class="body">从“有没有能力”转向“边界清晰 + 执行稳定”</text>
+    <text x="28" y="90" class="small">Skill 执行失败 48.6%，任务未闭环 19.6%</text>
+  </g>
+
+  <path d="M800 291V252" stroke="#67E8F9" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <path d="M800 682V760" stroke="#67E8F9" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <g transform="translate(90 522)">
+    <rect x="0" y="0" width="370" height="80" rx="18" fill="rgba(15,23,42,0.62)" stroke="#334155"/>
+    <text x="24" y="32" class="label">治理重点</text>
+    <text x="24" y="60" class="small">广告/推广、评价、商品上下架、拼好饭、登录授权、经营查询</text>
+  </g>
+
+  <g transform="translate(1140 522)">
+    <rect x="0" y="0" width="370" height="80" rx="18" fill="rgba(15,23,42,0.62)" stroke="#334155"/>
+    <text x="24" y="32" class="label">监控重点</text>
+    <text x="24" y="60" class="small">Fallback、执行失败、耗时、Token 高消耗、告警趋势</text>
+  </g>
+
+  <g transform="translate(92 940)">
+    <text class="small">数据来源：OpenClaw 评测平台、线上对话评测、CatClaw 监控平台接口抽样。部分指标仍需确认时间口径和生产环境映射。</text>
+  </g>
+</svg>

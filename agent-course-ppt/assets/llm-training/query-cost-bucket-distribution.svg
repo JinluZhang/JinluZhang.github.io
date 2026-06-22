@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1644" height="414" viewBox="0 0 1644 414" role="img" aria-labelledby="title desc">
+  <title id="title">数量占比 vs 成本占比</title>
+  <desc id="desc">三档 query 成本分桶对比：低成本 query 数量多但成本占比低，高成本 query 数量少但成本占比超过一半。</desc>
+  <defs>
+    <linearGradient id="queryGradient" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#a59cff"/>
+      <stop offset="1" stop-color="#5a56f0"/>
+    </linearGradient>
+    <linearGradient id="costGradient" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#ff4659"/>
+      <stop offset="1" stop-color="#ff6681"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#14213d" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1644" height="414" rx="22" fill="#ffffff"/>
+  <g opacity="0.22">
+    <text x="256" y="96" transform="rotate(-18 256 96)" fill="#eef2f7" font-family="Arial, Helvetica, sans-serif" font-size="28">ZHANGJINLU 0652295</text>
+    <text x="714" y="314" transform="rotate(-18 714 314)" fill="#eef2f7" font-family="Arial, Helvetica, sans-serif" font-size="28">ZHANGJINLU 0652295</text>
+    <text x="1196" y="102" transform="rotate(-18 1196 102)" fill="#eef2f7" font-family="Arial, Helvetica, sans-serif" font-size="28">ZHANGJINLU 0652295</text>
+  </g>
+
+  <text x="24" y="54" fill="#111827" font-family="Inter, PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="32" font-weight="800">数量占比 vs 成本占比</text>
+
+  <g transform="translate(1198 32)">
+    <rect x="0" y="0" width="20" height="20" rx="5" fill="#5a56f0"/>
+    <text x="30" y="18" fill="#555" font-family="Inter, PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="24">Query 数量占比</text>
+    <rect x="226" y="0" width="20" height="20" rx="5" fill="#ff4659"/>
+    <text x="256" y="18" fill="#555" font-family="Inter, PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="24">成本占比</text>
+  </g>
+
+  <g filter="url(#softShadow)" font-family="Inter, PingFang SC, Microsoft YaHei, Arial, sans-serif">
+    <g transform="translate(0 106)">
+      <rect x="294" y="0" width="320" height="48" rx="8" fill="url(#queryGradient)"/>
+      <text x="594" y="32" text-anchor="end" fill="#fff" font-size="24" font-weight="800">59.7%</text>
+      <text x="704" y="16" fill="#34383f" font-size="24" font-weight="800">¥0~2 · 2,472条</text>
+      <text x="654" y="49" fill="#666" font-size="22">均LLM 2.7次 · 均Tool 2.3次</text>
+      <rect x="952" y="0" width="94" height="48" rx="8" fill="url(#costGradient)"/>
+      <text x="968" y="32" fill="#fff" font-size="24" font-weight="800">17.5%</text>
+    </g>
+
+    <g transform="translate(0 210)">
+      <rect x="460" y="0" width="154" height="48" rx="8" fill="url(#queryGradient)"/>
+      <text x="594" y="32" text-anchor="end" fill="#fff" font-size="24" font-weight="800">28.7%</text>
+      <text x="704" y="16" fill="#34383f" font-size="24" font-weight="800">¥2~5 · 1,189条</text>
+      <text x="654" y="49" fill="#666" font-size="22">均LLM 7.5次 · 均Tool 6.9次</text>
+      <rect x="952" y="0" width="163" height="48" rx="8" fill="url(#costGradient)"/>
+      <text x="968" y="32" fill="#fff" font-size="24" font-weight="800">30.2%</text>
+    </g>
+
+    <g transform="translate(0 314)">
+      <rect x="528" y="0" width="86" height="48" rx="8" fill="url(#queryGradient)"/>
+      <text x="594" y="32" text-anchor="end" fill="#fff" font-size="24" font-weight="800">11.6%</text>
+      <text x="704" y="16" fill="#34383f" font-size="24" font-weight="800">¥5+ · 479条</text>
+      <text x="646" y="49" fill="#666" font-size="22">均LLM 31.9次 · 均Tool 31.8次</text>
+      <rect x="952" y="0" width="282" height="48" rx="8" fill="url(#costGradient)"/>
+      <text x="968" y="32" fill="#fff" font-size="24" font-weight="800">52.3%</text>
+    </g>
+  </g>
+</svg>

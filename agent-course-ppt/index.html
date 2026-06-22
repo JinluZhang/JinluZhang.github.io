@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>从 Agent 真实案例聊起</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="回到顶部">
+        <img class="brand-logo" src="./assets/tab.png" alt="华东 AI 锻造营" />
+      </a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="#cases">真实案例</a>
+        <a href="#architecture">系统组件</a>
+        <a href="#frontier">前沿趋势</a>
+        <a href="#human">人之为人</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section-band">
+        <div class="hero-shell">
+          <div class="hero-copy">
+          <p class="eyebrow">课程目录</p>
+          <h1>从 Agent 真实案例聊起，看看业界前沿，和人之为人</h1>
+          <p class="lead">
+            这次分享分成三段：先从商家 Claw 的真实案例进入，看看我们在 to be Agent 上做了什么；再看行业前沿仍在快速变化，后面可能还会发生什么；最后回到“人之为人”，讨论当智力可以被调度，我们要怎么选择自己的站位。
+          </p>
+          </div>
+
+          <div class="agenda-grid" aria-label="课程目录">
+            <article class="agenda-card agenda-card-primary">
+              <div class="agenda-card-head">
+                <span class="agenda-index">01</span>
+                <span class="agenda-label">第一部分</span>
+              </div>
+              <h2>从商家 Claw 真实案例聊起</h2>
+              <p class="agenda-question">一个给商家用的数字员工，到底能干什么？</p>
+              <p class="agenda-description">先用真实商家、真实截图和真实采纳动作建立直觉，再进入 to be Agent 的实现方案。</p>
+              <ul>
+                <li>商家 Claw 的真实案例：生图、商圈对标、菜单排序</li>
+                <li>to be Agent 上我们做了什么</li>
+                <li>LLM 选型、Harness / Agent Loop、评测与质量保障</li>
+              </ul>
+              <a href="#cases" class="agenda-link">进入真实案例</a>
+            </article>
+
+            <article class="agenda-card">
+              <div class="agenda-card-head">
+                <span class="agenda-index">02</span>
+                <span class="agenda-label">第二部分</span>
+              </div>
+              <h2>看看业界前沿</h2>
+              <p class="agenda-question">整个行业仍在高度不确定性之中，后面还可能发生什么？</p>
+              <p class="agenda-description">不追求给定论，而是用几个仍在演进的方向，理解 AI 能力边界还会继续移动。</p>
+              <ul>
+                <li>历史信息处理：Memory / Dreaming、Long Context、Parametric Memory</li>
+                <li>统一架构 / 全模态：文字、图片、语音、表格、动作逐渐汇合</li>
+                <li>自进化：AI 参与改进自己的工具链</li>
+              </ul>
+              <a href="#frontier" class="agenda-link">查看前沿趋势</a>
+            </article>
+
+            <article class="agenda-card">
+              <div class="agenda-card-head">
+                <span class="agenda-index">03</span>
+                <span class="agenda-label">第三部分</span>
+              </div>
+              <h2>人之为人</h2>
+              <p class="agenda-question">AI 能做更多事之后，前线价值会迁移到哪里？</p>
+              <p class="agenda-description">不急着回答谁会被替代，先看清一个变化：技能变得普及之后，真正被放大的是会定义问题、组织资源、验证结果的人。</p>
+              <ul>
+                <li>写字与写代码：技能平权后，稀缺点会迁移</li>
+                <li>工业革命类比：体力被调度之后，智力也开始被调度</li>
+                <li>贴着能力边界用 AI，把结果带回真实经营</li>
+              </ul>
+              <a href="#human" class="agenda-link">进入人之为人</a>
+            </article>
+          </div>
+
+          <div class="hero-transition" aria-label="课程承接关系">
+            <div>
+              <b>已经做到什么</b>
+              <span>真实商家案例建立直觉</span>
+            </div>
+            <i></i>
+            <div>
+              <b>还会发生什么</b>
+              <span>前沿方向继续移动边界</span>
+            </div>
+            <i></i>
+            <div>
+              <b>人站在哪里</b>
+              <span>目标、判断、关系与责任</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cases" class="section">
+        <div class="section-title">
+          <p class="eyebrow">Part 1</p>
+          <h2>真实案例：商家 Claw 到底能做什么</h2>
+          <p>
+            从真实商家、真实截图和真实采纳动作开始，看一个给商家用的数字员工如何进入经营现场。
+          </p>
+        </div>
+
+        <article class="case-block case-feature" id="case-yuanxiang">
+          <div class="case-copy case-feature-copy">
+            <div class="case-kicker">
+              <span class="case-index">01</span>
+              <span>装修及菜品生图 / 门店装修焕新</span>
+            </div>
+            <h3>装修生图采纳：从单张海报到完整装修</h3>
+            <p class="case-lead">
+              沅湘小馆现场看到 AI 生成的芒种海报后直接换上；宅门记忆则提供了完整门店装修 Before / After 素材。这个案例的重点不是“AI 建议看起来不错”，而是 AI 生成的经营素材真的进入了商家动作。
+            </p>
+            <div class="case-proof-strip" aria-label="核心事实">
+              <div>
+                <b>现场采纳</b>
+                <span>生成海报被老板直接换上</span>
+              </div>
+              <div>
+                <b>成本感知</b>
+                <span>商家反馈一年约 6 万代运营费用，另有摄影成本</span>
+              </div>
+              <div>
+                <b>能力延展</b>
+                <span>从替换单张海报，延展到完整门店装修焕新</span>
+              </div>
+            </div>
+            <div class="quote-panel case-thesis">
+              <b>关键价值</b>
+              <span>Agent 接入具体业务动作后，价值从“咨询”转向“低成本经营能力交付”。商家不只需要一句建议，更需要能立刻使用、能省钱省时间的素材和动作。</span>
+            </div>
+          </div>
+
+          <div class="case-feature-media" aria-label="装修生图案例素材">
+            <figure class="case-media case-flow-shot expandable-shot" role="button" tabindex="0" aria-label="放大查看商家 Claw 装修及菜品生图链路截图">
+              <img src="./assets/km-images/01_origin.png" alt="商家 Claw 装修及菜品生图链路截图" />
+              <figcaption>链路截图：从商家问题进入，生成可采纳的装修及菜品素材。</figcaption>
+            </figure>
+
+            <div class="poster-adoption">
+              <figure class="expandable-shot" role="button" tabindex="0" aria-label="放大查看沅湘小馆 AI 生成芒种海报">
+                <img src="./assets/cases/yuanxiang/yuanxiang-ai-generated-poster.jpg" alt="沅湘小馆 AI 生成芒种海报" />
+                <figcaption>AI 生成海报</figcaption>
+              </figure>
+              <div class="adoption-arrow" aria-hidden="true">采纳</div>
+              <figure class="expandable-shot" role="button" tabindex="0" aria-label="放大查看沅湘小馆现场换上海报后的截图">
+                <img src="./assets/cases/yuanxiang/yuanxiang-live-updated-poster.jpg" alt="沅湘小馆现场换上海报后的截图" />
+                <figcaption>现场换上</figcaption>
+              </figure>
+            </div>
+
+            <div class="decoration-compare">
+              <figure class="expandable-shot" role="button" tabindex="0" aria-label="放大查看宅门记忆完整装修前截图">
+                <span>Before</span>
+                <img src="./assets/cases/zaimen-memory/zaimen-memory-full-decoration-before.jpg" alt="宅门记忆完整装修前截图" />
+              </figure>
+              <figure class="expandable-shot" role="button" tabindex="0" aria-label="放大查看宅门记忆完整装修后提亮版截图">
+                <span>After</span>
+                <img src="./assets/cases/zaimen-memory/zaimen-memory-full-decoration-after-bright.jpg" alt="宅门记忆完整装修后提亮版截图" />
+              </figure>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-block case-evidence" id="case-gangji">
+          <figure class="case-media gangji-shot expandable-shot" role="button" tabindex="0" aria-label="放大查看港记甜品商圈和标杆分析截图">
+            <img src="./assets/km-images/07_src.png" alt="港记甜品商圈和标杆分析截图" />
+            <figcaption>港记甜品：商圈、货源、标杆菜单结构与活动建议。</figcaption>
+          </figure>
+          <div class="case-copy">
+            <div class="case-kicker">
+              <span class="case-index">02</span>
+              <span>经营分析诊断 / 商圈标杆对标</span>
+            </div>
+            <h3>港记甜品：商圈和标杆证据推动当场采纳</h3>
+            <p>
+              同商圈多个商家是同货源，商家 Claw 基于标杆给出菜单结构及活动调整建议，商家当场采纳。这里的关键不是“AI 说得有道理”，而是它把分散证据组织成了可推进的经营建议。
+            </p>
+            <div class="evidence-chain" aria-label="港记甜品证据链">
+              <div>
+                <b>商圈参照</b>
+                <span>先把门店放回同商圈竞争环境里看。</span>
+              </div>
+              <div>
+                <b>标杆证据</b>
+                <span>用同货源和菜单结构对齐建议依据。</span>
+              </div>
+              <div>
+                <b>现场采纳</b>
+                <span>建议不只停留在分析页，而进入商家动作。</span>
+              </div>
+            </div>
+            <div class="quote-panel">
+              <b>关键启发</b>
+              <span>Agent 的强项是把分散证据组织成可行动建议；人负责选择、沟通和推进，把证据转化成商家愿意采纳的动作。</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-block case-boundary" id="case-dijiu">
+          <div class="case-copy">
+            <div class="case-kicker">
+              <span class="case-index">03</span>
+              <span>菜单商品优化 / 采纳与边界</span>
+            </div>
+            <h3>第酒烧场：菜单排序建议有效，但真实约束决定边界</h3>
+            <p>
+              第酒烧场采纳了基于销量、加购和转化数据的菜单排序建议。采纳后，在未剔除其他动作干扰的情况下，下单转化提升 3.4pp。但上新和组套建议没有被采纳，因为真实经营里还有厨房、食材、区域口味和用餐偏好这些约束。
+            </p>
+            <div class="quote-panel">
+              <b>关键启发</b>
+              <span>Agent 进入经营闭环后，评价标准不是“答案看起来合理”，而是能否被商家采纳、能否产生业务指标变化、是否贴合真实经营约束。</span>
+            </div>
+          </div>
+
+          <div class="dijiu-outcome" aria-label="第酒烧场采纳结果">
+            <div class="dijiu-metric">
+              <span class="evidence-number">3.4pp</span>
+              <span class="evidence-label">下单转化提升</span>
+              <p>排序建议被采纳后出现的指标变化；该结果未剔除其他经营动作干扰。</p>
+            </div>
+
+            <div class="adoption-map">
+              <div class="accepted">
+                <b>被采纳</b>
+                <strong>菜单排序</strong>
+                <span>销量、加购、转化数据支撑明确，动作路径清晰。</span>
+              </div>
+              <div class="not-accepted">
+                <b>未采纳</b>
+                <strong>上新 / 组套</strong>
+                <span>涉及厨房能力、食材损耗、出餐时长和区域口味，不能只靠通用推荐。</span>
+              </div>
+            </div>
+
+            <div class="constraint-grid" aria-label="未采纳原因">
+              <span>出餐时长</span>
+              <span>厨房设备</span>
+              <span>食材损耗</span>
+              <span>区域口味</span>
+              <span>用餐偏好</span>
+            </div>
+          </div>
+        </article>
+
+        <section class="product-showcase" id="product-interactions" aria-labelledby="product-interactions-title">
+          <div class="section-title showcase-title">
+            <p class="eyebrow">Product</p>
+            <h2 id="product-interactions-title">更多产品交互展示</h2>
+          </div>
+          <div class="interaction-wall" aria-label="产品交互截图">
+            <figure class="interaction-shot interaction-shot-tall expandable-shot" role="button" tabindex="0" aria-label="放大查看产品交互截图一">
+              <img src="./assets/km-images/08_src.png" alt="产品交互截图一" />
+            </figure>
+            <figure class="interaction-shot expandable-shot" role="button" tabindex="0" aria-label="放大查看产品交互截图二">
+              <img src="./assets/km-images/09_src.png" alt="产品交互截图二" />
+            </figure>
+            <figure class="interaction-shot expandable-shot" role="button" tabindex="0" aria-label="放大查看产品交互截图三">
+              <img src="./assets/km-images/10_src.png" alt="产品交互截图三" />
+            </figure>
+            <figure class="interaction-shot interaction-shot-wide expandable-shot" role="button" tabindex="0" aria-label="放大查看产品交互截图四">
+              <img src="./assets/km-images/11_src.png" alt="产品交互截图四" />
+            </figure>
+          </div>
+        </section>
+      </section>
+
+      <section id="architecture" class="section section-band architecture-section">
+        <div class="section-title">
+          <p class="eyebrow">System</p>
+          <h2>从案例回到系统：LLM、Harness 和评测撑起数字员工</h2>
+          <p>前面的案例看到的是结果：素材被采纳、证据推动沟通、排序建议进入经营动作。回到系统里，一个商家问题要先被理解，再被组织进 Agent Loop，最后通过工具、数据和评测进入可执行结果。</p>
+        </div>
+
+        <figure class="architecture-visual expandable-shot" role="button" tabindex="0" aria-label="放大查看商家 Claw Agent Loop 架构图">
+          <img src="./assets/architecture/agent-harness-loop.png" alt="商家 Claw Agent Loop 架构图" />
+          <figcaption>一个商家问题进入系统后，会在理解、决策、行动、观察之间反复循环，直到形成建议、完成动作，或进入人工确认。</figcaption>
+        </figure>
+
+        <div class="architecture-flow" aria-label="商家问题到可执行建议的处理路径">
+          <div class="architecture-step start">
+            <span>01</span>
+            <b>商家问题</b>
+            <p>来自经营、活动、商品、装修、规则等真实场景。</p>
+          </div>
+          <div class="architecture-step">
+            <span>02</span>
+            <b>LLM</b>
+            <p>理解目标、推理路径、判断下一步该查什么或做什么。</p>
+          </div>
+          <div class="architecture-step">
+            <span>03</span>
+            <b>Harness</b>
+            <p>把模型组织进 Agent Loop，让它按步骤执行、观察和修正。</p>
+          </div>
+          <div class="architecture-step">
+            <span>04</span>
+            <b>业务工具 / 数据 / 知识库</b>
+            <p>查证据、读状态、调能力，把语言判断接到真实业务世界。</p>
+          </div>
+          <div class="architecture-step">
+            <span>05</span>
+            <b>评测</b>
+            <p>持续监控软错误、证据链、稳定性、成本和业务结果。</p>
+          </div>
+          <div class="architecture-step end">
+            <span>06</span>
+            <b>可执行建议</b>
+            <p>输出经营建议、素材方案、操作路径，或进入人工确认。</p>
+          </div>
+        </div>
+
+        <div class="architecture-pillars">
+          <article>
+            <span>Core 01</span>
+            <h3>LLM 是数字员工的脑子</h3>
+            <p>它让系统不再只是固定流程自动化，而能面对新问题理解目标、寻找路径、在失败后换方向。</p>
+          </article>
+          <article>
+            <span>Core 02</span>
+            <h3>Harness 让聪明可控</h3>
+            <p>它负责循环、工具调用、重试、停止、确认和兜底，让模型在可预期的轨道里完成任务。</p>
+          </article>
+          <article>
+            <span>Core 03</span>
+            <h3>评测让系统可上线</h3>
+            <p>当错误变得像人一样“看似合理”，评测就要盯住证据链、稳定性、成本和真实业务效果。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="llm" class="section llm-section">
+        <div class="section-title">
+          <p class="eyebrow">3.3 LLM</p>
+          <h2>脑子是 Agent 成立的核心驱动力</h2>
+          <p>Agent 不只是因为有循环才成立，而是因为 LLM 已经具备理解目标、规划路径、调用工具、失败后换方向的能力。模型越会自己找路，越需要同时看能力、成本、稳定性和边界。</p>
+        </div>
+
+        <article class="llm-feature">
+          <div class="llm-copy">
+            <span class="section-kicker">Principle & Training</span>
+            <h3>从预测下一个 token，到学会在复杂任务里找路径</h3>
+            <p>Pre-train 让模型学会语言和世界知识；SFT 让模型学会按人的指令格式做事；RL 在复杂、可验证的任务里，让模型自己探索路径，再根据结果反馈调整行为。</p>
+            <div class="llm-training-points">
+              <div>
+                <b>Pre-train</b>
+                <span>学会语言、知识和模式。</span>
+              </div>
+              <div>
+                <b>SFT</b>
+                <span>学会对话、指令跟随、工具调用格式。</span>
+              </div>
+              <div>
+                <b>RL</b>
+                <span>在可验证结果里学习探索和泛化。</span>
+              </div>
+            </div>
+          </div>
+          <div class="llm-visual-grid llm-visual-triple">
+            <figure class="llm-shot llm-shot-primary expandable-shot" role="button" tabindex="0" aria-label="放大查看 predict next token 原理图">
+              <img src="./assets/llm-training/predict-next-token-principle.svg" alt="predict next token 原理图" />
+            </figure>
+            <figure class="llm-shot expandable-shot" role="button" tabindex="0" aria-label="放大查看 SFT 密集监督示例图">
+              <img src="./assets/llm-training/sft-dense-supervision.png" alt="SFT 密集监督示例图" />
+            </figure>
+            <figure class="llm-shot expandable-shot" role="button" tabindex="0" aria-label="放大查看 RL 结果奖励示例图">
+              <img src="./assets/llm-training/rl-result-reward.png" alt="RL 结果奖励示例图" />
+            </figure>
+          </div>
+        </article>
+
+        <article class="llm-panel llm-cost-panel">
+          <div class="llm-panel-head">
+            <span class="section-kicker">Cost & Cache</span>
+            <h3>Token 成本不是模型单价问题，而是 Agent 工程问题</h3>
+            <p>同样是 1M tokens，不同模型成本差异很大；但真正决定是否划算的，是任务能不能稳定完成、上下文能不能复用、失败能不能及时停下来。</p>
+          </div>
+          <div class="cost-layout">
+            <figure class="cost-bucket-chart expandable-shot" role="button" tabindex="0" aria-label="放大查看 query 成本分桶图">
+              <img src="./assets/llm-training/query-cost-bucket-distribution.svg" alt="query 数量占比与成本占比分桶图" />
+            </figure>
+            <div class="cost-table-wrap">
+              <table class="cost-table">
+                <thead>
+                  <tr>
+                    <th>模型 / 版本</th>
+                    <th>加权成本 / 1M tokens</th>
+                    <th>适合说明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>DeepSeek V4-Pro 促销价</td>
+                    <td>¥0.2994</td>
+                    <td>极低成本口径</td>
+                  </tr>
+                  <tr>
+                    <td>DeepSeek V4-Pro 原价</td>
+                    <td>¥1.1981</td>
+                    <td>约为 Opus 的 1/6</td>
+                  </tr>
+                  <tr>
+                    <td>Kimi K2.6</td>
+                    <td>¥1.6390</td>
+                    <td>约为 Opus 的 1/4 到 1/5</td>
+                  </tr>
+                  <tr>
+                    <td>Claude Sonnet 4.6</td>
+                    <td>¥4.3770</td>
+                    <td>中高成本口径</td>
+                  </tr>
+                  <tr>
+                    <td>Claude Opus 4.6 / 4.7</td>
+                    <td>¥7.2948</td>
+                    <td>当前强 Agent 模型成本口径</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="cost-metrics">
+              <div>
+                <span>70%</span>
+                <b>可能被浪费的 token</b>
+                <p>框架机制、工具质量、环境不稳定和使用不当都会放大成本。</p>
+              </div>
+              <div>
+                <span>Cache</span>
+                <b>稳定前缀才有价值</b>
+                <p>动态 DOM、截图、长日志会破坏缓存连续性，让成本膨胀。</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="llm-feature llm-best-try llm-best-try-page">
+          <div class="llm-copy">
+            <span class="section-kicker">难任务复盘</span>
+            <h3>LLM 会 best try，但不一定沿着你预期的轨道完成任务</h3>
+            <p>“导出开业 30 天内未开启明厨亮灶的门店列表”没有现成路径。强模型会搜索能力、猜接口、写脚本、扫页面、解析 JS bundle，最后甚至用替代指标把任务做成。</p>
+            <div class="best-try-facts">
+              <div>
+                <span>¥84.33</span>
+                <b>第一次尝试未交付</b>
+              </div>
+              <div>
+                <span>3447</span>
+                <b>覆盖门店池</b>
+              </div>
+              <div>
+                <span>19</span>
+                <b>最终导出未开启门店</b>
+              </div>
+            </div>
+            <p class="llm-quote">LLM 的价值是会找路，风险也是会乱找路。Harness 的价值，是让它在可控轨道上找路。</p>
+          </div>
+          <figure class="llm-best-try-visual expandable-shot" role="button" tabindex="0" aria-label="放大查看从野生探索到有护栏的 Agent Loop">
+            <img src="./assets/architecture/llm-best-try-harness-loop-v1.png" alt="从野生探索到有护栏的 Agent Loop" />
+          </figure>
+
+          <div class="trace-compact" aria-label="明厨亮灶难任务完整探索路径">
+            <div class="trace-compact-head">
+              <span>完整路径</span>
+              <b>一次难任务里，模型真实走过的完整过程</b>
+              <p>现场不需要逐字读完，只看几个高亮节点：失败、试探、误判、换方向、替代口径、交付。</p>
+            </div>
+            <div class="trace-compact-grid">
+              <div class="trace-stage trace-stage-fail">
+                <h4>前两次尝试</h4>
+                <div class="trace-row warn">
+                  <span>11:57</span>
+                  <b>第一次开始</b>
+                  <em>¥84.33，未真正交付</em>
+                </div>
+                <div class="trace-row">
+                  <span>搜索</span>
+                  <b>明厨 / 亮灶 / kitchen / openDate</b>
+                  <em>先找已有能力入口</em>
+                </div>
+                <div class="trace-row risk">
+                  <span>试探</span>
+                  <b>猜接口、枚举 exCode、写临时脚本</b>
+                  <em>向系统边界外扩</em>
+                </div>
+                <div class="trace-row risk">
+                  <span>误判</span>
+                  <b>showFoodSafety ≠ 明厨亮灶状态</b>
+                  <em>看似接近，但口径不稳</em>
+                </div>
+                <div class="trace-row warn">
+                  <span>13:55</span>
+                  <b>第二次仍然失败</b>
+                  <em>结论转向人工协助</em>
+                </div>
+              </div>
+
+              <div class="trace-stage trace-stage-success">
+                <h4>最终突破</h4>
+                <div class="trace-row pivot">
+                  <span>14:03</span>
+                  <b>换方向：从 foodSafety 页面入手</b>
+                  <em>从页面和前端资源反推接口</em>
+                </div>
+                <div class="trace-row">
+                  <span>解析</span>
+                  <b>/gw/food/safety/merchant/display/status/query</b>
+                  <em>扫 JS bundle，定位真实接口</em>
+                </div>
+                <div class="trace-row pivot">
+                  <span>替代</span>
+                  <b>is_new_poi ≈ 开业 30 天内</b>
+                  <em>完成任务，但口径变成替代口径</em>
+                </div>
+                <div class="trace-row success">
+                  <span>交付</span>
+                  <b>3447 → 154 → 19</b>
+                  <em>导出未开启门店列表</em>
+                </div>
+              </div>
+            </div>
+            <div class="trace-behavior-row">
+              <span>不轻易放弃</span>
+              <span>会绕到意想不到的路径</span>
+              <span>同样需要边界、预算和停止条件</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="harness" class="section section-band harness-section">
+        <div class="section-title">
+          <p class="eyebrow">3.4 Harness</p>
+          <h2>Harness：让聪明的大脑在可控轨道上做事</h2>
+          <p>前面明厨亮灶的例子说明，LLM 能在没有现成路径时主动找路；但要把这种能力放进真实商家场景，还需要流程、工具、预算和边界一起工作。</p>
+        </div>
+
+        <div class="harness-hero">
+          <figure class="harness-loop-visual expandable-shot" role="button" tabindex="0" aria-label="放大查看 Agent Loop 工作循环">
+            <img src="./assets/architecture/agent-harness-loop.png" alt="Agent Loop 工作循环：感知、决策、行动、观察、再决策" />
+          </figure>
+          <article class="harness-loop-card">
+            <span class="section-kicker">Agent Loop</span>
+            <h3>Harness 不是让模型更聪明，而是让模型把聪明稳定地用出来</h3>
+            <p>一个新 BD 接到商家问题，不会只靠脑子想一句答案，而是会确认问题、查数据、看规则、判断证据，再决定继续追问、推进执行，还是交给更合适的人。Harness 做的就是把这套工作习惯系统化。</p>
+            <div class="loop-steps" aria-label="Agent Loop 六步">
+              <span>理解目标</span>
+              <span>判断下一步</span>
+              <span>调用能力</span>
+              <span>观察结果</span>
+              <span>修正计划</span>
+              <span>继续 / 停止 / 交给人</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="harness-guardrails" aria-label="Harness 四个关键能力">
+          <article>
+            <span>01</span>
+            <h3>任务组织</h3>
+            <p>把“最近单量差怎么办”拆成可执行步骤：先看流量、进店、下单、活动、评价和商品，而不是直接给一句泛泛建议。</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>工具调度</h3>
+            <p>LLM 判断要查什么，Harness 把数据、知识库和业务工具的调用过程跑稳，避免模型自己去猜不存在的接口。</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>结果观察</h3>
+            <p>工具返回后继续判断：证据够不够，口径有没有冲突，是否需要补查，能不能进入下一步。</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>边界控制</h3>
+            <p>决定什么时候继续、什么时候停止、什么时候二次确认、什么时候交给人。商家经营动作越真实，这一点越关键。</p>
+          </article>
+        </div>
+
+        <div class="harness-contrast" aria-label="有无 Harness 的差异">
+          <div>
+            <b>只有 LLM</b>
+            <p>会主动找路，也可能反复试探、误判口径、猜接口、写临时脚本，成本和动作边界都不稳定。</p>
+          </div>
+          <div>
+            <b>LLM + Harness</b>
+            <p>把探索收束到白名单工具、预算阈值、停止条件和人工确认里，让 Agent 在真实业务里可运行、可追踪、可兜底。</p>
+          </div>
+        </div>
+
+        <p class="harness-slogan">LLM 负责找路，Harness 负责让它在可控轨道上找路。</p>
+      </section>
+
+      <section id="evaluation" class="section evaluation-section">
+        <div class="section-title">
+          <p class="eyebrow">3.5 评测</p>
+          <h2>评测：把一个“软员工”训练到可上线、可监控、可迭代</h2>
+          <p>Agent 系统的错误不总是接口报错，也可能是答案看起来合理、路径看起来努力，但证据链、口径、成本或动作边界出了问题。</p>
+        </div>
+
+        <div class="evaluation-layout">
+          <figure class="evaluation-visual expandable-shot" role="button" tabindex="0" aria-label="放大查看评测平台质量闭环">
+            <img src="./assets/evaluation/skill-eval-platform-flow.svg" alt="评测平台质量闭环：开发准入评测、线上真实对话评测、运行监控告警、BadCase 回流治理" />
+          </figure>
+
+          <article class="evaluation-core">
+            <span class="section-kicker">Quality Loop</span>
+            <h3>不是一次打分，而是一条质量闭环</h3>
+            <p>上线前看准入，线上看真实对话，运行中看监控告警，失败后把 BadCase 回流成新的样本、断言和规则。</p>
+            <div class="quality-loop" aria-label="评测质量闭环">
+              <div>
+                <span>01</span>
+                <b>准入评测</b>
+                <em>能不能上线</em>
+              </div>
+              <div>
+                <span>02</span>
+                <b>真实对话</b>
+                <em>用户怎么问</em>
+              </div>
+              <div>
+                <span>03</span>
+                <b>运行监控</b>
+                <em>成本、耗时、失败</em>
+              </div>
+              <div>
+                <span>04</span>
+                <b>回流治理</b>
+                <em>让下一版更稳</em>
+              </div>
+            </div>
+            <div class="evaluation-demo-links" aria-label="评测系统入口">
+              <a href="https://nocode-test.ee.test.sankuai.com/user_test/e9oehv#/CLCMarketingAgent/skill-eval-dashboard/admission" target="_blank" rel="noreferrer">
+                单 Skill 准入评测
+              </a>
+              <a href="https://nocode-test.ee.test.sankuai.com/user_test/e9oehv#/CLCMarketingAgent/skill-eval-dashboard/route" target="_blank" rel="noreferrer">
+                多 Skill 路由评测
+              </a>
+              <a href="https://nocode-test.ee.test.sankuai.com/user_test/e9oehv#/badcases" target="_blank" rel="noreferrer">
+                BadCase 回流治理
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="evaluation-risk-grid" aria-label="Agent 评测需要覆盖的错误形态">
+          <article>
+            <b>证据链不对</b>
+            <p>答案像是合理的，但引用的数据、规则或工具来源并不能支持结论。</p>
+          </article>
+          <article>
+            <b>输出不稳定</b>
+            <p>同一个问题多问几次，路径和结果可能变化，商家拿到的建议不一致。</p>
+          </article>
+          <article>
+            <b>工具顺序变化</b>
+            <p>先查什么、后查什么会影响最终判断，Agent 不能每次都随缘组织动作。</p>
+          </article>
+          <article>
+            <b>信息源冲突</b>
+            <p>多个工具、页面和数据源给出不同信号时，需要判断该相信哪个口径。</p>
+          </article>
+          <article>
+            <b>旁证推理过度</b>
+            <p>模型会像明厨亮灶案例一样找替代证据；这有价值，也必须被边界约束。</p>
+          </article>
+          <article>
+            <b>升级带来新风险</b>
+            <p>模型更强之后会尝试新路径，旧评测不一定能覆盖新的行为模式。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="frontier" class="section">
+        <div class="section-title">
+          <p class="eyebrow">Part 2</p>
+          <h2>前沿趋势：行业边界还在快速移动</h2>
+          <p>这一部分不追求给出定论，而是看几个仍在演进的方向，以及这些方向成熟后，我们使用 AI 的方式可能如何变化。</p>
+        </div>
+      </section>
+
+      <section id="frontier-memory" class="section section-band memory-section">
+        <div class="section-title">
+          <p class="eyebrow">4.3 方向 1</p>
+          <h2>历史信息处理：Memory / Dreaming、Long Context、Parametric Memory</h2>
+          <p>当历史对话、商家资料、经营动作和失败经验越来越多，AI 必须有技术方案处理“过去”。Memory / Dreaming 是人类最容易理解的路线，但不是唯一答案。</p>
+        </div>
+
+        <div class="memory-layout">
+          <article class="memory-thesis">
+            <span class="section-kicker">Research Question</span>
+            <h3>AI 不能每次都像第一次认识你</h3>
+            <p>如果每次任务都重新解释背景，Agent 的上限会被上下文、成本和用户耐心卡住。前沿方向正在解决同一个问题：怎样让系统带着过去的经验继续工作。</p>
+            <blockquote>Train with finite context, use as infinite context.</blockquote>
+            <div class="memory-impact">
+              <b>成熟后的使用姿势</b>
+              <p>我们可能不再反复补充背景，而是让 AI 自动沉淀偏好、复盘失败路径、整理长期经验，再把这些经验带入下一次任务。</p>
+            </div>
+          </article>
+
+          <div class="memory-visuals" aria-label="Memory 与 Dreaming 视觉素材">
+            <figure class="memory-visual memory-visual-primary expandable-shot" role="button" tabindex="0" aria-label="放大查看记忆机制与 AI 系统映射图">
+              <img src="./assets/frontier/memory-dreaming/brain-ai-memory-mapping.png" alt="人类记忆机制与 AI 系统的映射：上下文、记忆文件、模型权重、系统提示词和 Auto Dream" />
+            </figure>
+            <figure class="memory-visual expandable-shot" role="button" tabindex="0" aria-label="放大查看 Dreaming 记忆整理图">
+              <img src="./assets/frontier/memory-dreaming/dreaming-memory-consolidation.png" alt="Dreaming 机制：把碎片经验整理成可读记忆和复盘结果" />
+            </figure>
+          </div>
+        </div>
+
+        <div class="memory-routes" aria-label="处理历史信息的三种路线">
+          <article>
+            <span>01</span>
+            <h3>Memory / Dreaming</h3>
+            <p><b>研究进展：</b>从把历史对话塞进上下文，走向长期记忆、经验压缩和后台复盘。</p>
+            <p><b>使用变化：</b>系统把碎片经验整理成人可读的记忆文件、规则和复盘，下次任务直接继承。</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Long Context</h3>
+            <p><b>研究进展：</b>训练和推理阶段都在变长，1M 级上下文已经进入前沿模型能力范围。</p>
+            <p><b>使用变化：</b>一次任务现场可以带着更多文档、规则、聊天记录和经营历史一起工作。</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Parametric Memory</h3>
+            <p><b>研究进展：</b>把长期经验、知识和模式压进模型参数里，不一定以人可读文件存在。</p>
+            <p><b>使用变化：</b>经验可能被更深层地内化进模型能力，而不是每次都显式拿出来读。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="frontier-unified" class="section unified-section">
+        <div class="section-title">
+          <p class="eyebrow">4.4 方向 2</p>
+          <h2>统一架构 / 全模态：理解、生成、对齐会不会走向同一套系统？</h2>
+          <p>语言模型已经把“读、写、对齐”相对收进同一套 Transformer 范式里；图像和多模态还长期是理解一套、生成一套、对齐一套。最近一些工作开始露出“大一统”的影子。</p>
+        </div>
+
+        <div class="unified-layout">
+          <article class="unified-thesis">
+            <span class="section-kicker">Unification</span>
+            <h3>从多个能力栈，走向一个统一系统</h3>
+            <p>未来的 AI 使用姿势，可能不再区分“让它看图、让它生图、让它写文案、让它操作工具”。用户给出混合材料和目标，模型系统自己完成理解、生成、编辑、对齐和行动。</p>
+            <div class="unified-impact">
+              <b>关键变化</b>
+              <p>竞争不只看单项能力榜单，而要看一套系统能否把多模态输入、生成能力、工具行动、成本和延迟放在一起优化。</p>
+            </div>
+          </article>
+
+          <div class="unified-diagram" aria-label="理解、生成、对齐统一趋势图">
+            <div class="unified-lane unified-lane-language">
+              <span>语言侧</span>
+              <b>Transformer + next token</b>
+              <div class="unified-chip-row">
+                <em>理解</em>
+                <em>生成</em>
+                <em>对齐</em>
+              </div>
+              <p>读、写、偏好对齐被收进同一套语言模型范式。</p>
+            </div>
+            <div class="unified-arrow">→</div>
+            <div class="unified-lane unified-lane-multimodal">
+              <span>多模态侧</span>
+              <b>理解 / 生成 / 对齐正在汇合</b>
+              <div class="unified-stack">
+                <em>视觉编码器 / VLM</em>
+                <em>Diffusion / Flow</em>
+                <em>跨模态对齐</em>
+              </div>
+              <p>从三套能力栈，走向统一的多模态模型系统。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="generation-shift" aria-label="语言生成范式变化">
+          <article>
+            <span>Autoregressive</span>
+            <h3>逐 token 生成</h3>
+            <p>像打字机一样从左到右，一个 token 接一个 token 输出。它稳定、成熟，但延迟和并行度会受生成顺序限制。</p>
+          </article>
+          <article class="generation-shift-focus">
+            <span>ELF / Diffusion / Flow</span>
+            <h3>先在连续空间里形成整体，再逐步修正</h3>
+            <p>ELF 提示语言生成未必只能在离散 token 上进行，也可能进入 continuous embedding / latent 空间，通过 diffusion 或 flow 完成生成，再映射回 token。</p>
+          </article>
+          <article>
+            <span>Product Signal</span>
+            <h3>最先改变的是交互体感</h3>
+            <p>如果并行生成和低延迟成熟，用户首先感受到的不是论文术语，而是 AI 响应更快、更实时、更像一个可以连续协作的系统。</p>
+          </article>
+        </div>
+
+        <div class="unified-demo-links" aria-label="统一架构和 diffusion language model 演示入口">
+          <a href="https://chat.inceptionlabs.ai/" target="_blank" rel="noreferrer">
+            <b>Inception Chat / Mercury</b>
+            <span>主演示：感受 diffusion LLM 的速度和低延迟</span>
+          </a>
+          <a href="https://huggingface.co/spaces/multimodalart/LLaDA-2-1" target="_blank" rel="noreferrer">
+            <b>LLaDA 2.1</b>
+            <span>补充演示：观察 mask 文本逐步去噪、补全</span>
+          </a>
+          <a href="https://deepmind.google/models/gemini-diffusion/" target="_blank" rel="noreferrer">
+            <b>Gemini Diffusion</b>
+            <span>权威引用：迭代修正、block tokens 的路线信号</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="frontier-self-improve" class="section section-band self-section">
+        <div class="section-title">
+          <p class="eyebrow">4.5 方向 3</p>
+          <h2>自进化：AI 正在进入自己的研发闭环</h2>
+          <p>这里的重点不是科幻式“AI 自我觉醒”，而是一个更现实的趋势：AI 正在接管越来越多改进 AI 系统本身的工作，从写代码、跑实验、修 bug、做评测，到提出下一步实验。</p>
+        </div>
+
+        <div class="self-loop-layout">
+          <article class="self-thesis">
+            <span class="section-kicker">When AI builds itself</span>
+            <h3>执行越来越便宜，判断会变得更贵</h3>
+            <p>Anthropic 的主线很清楚：AI 参与开发的范围正在扩大，但完整 recursive self-improvement 还没有发生，也不必然发生。真正已经开始变化的是组织瓶颈：执行被加速以后，目标选择、结果验证、风险控制和协同会成为更稀缺的环节。</p>
+            <a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank" rel="noreferrer">Anthropic Institute 原文</a>
+          </article>
+
+          <div class="self-timeline" aria-label="AI 参与 AI 开发的阶段">
+            <div>
+              <span>01</span>
+              <b>人写代码和文档</b>
+              <em>AI 只是被动工具</em>
+            </div>
+            <div>
+              <span>02</span>
+              <b>Chatbot 生成片段</b>
+              <em>补全、解释、草稿</em>
+            </div>
+            <div>
+              <span>03</span>
+              <b>Coding Agent 改文件</b>
+              <em>读仓库、改代码、跑测试</em>
+            </div>
+            <div>
+              <span>04</span>
+              <b>Autonomous Agent 跑任务</b>
+              <em>运行代码，委托数小时工作</em>
+            </div>
+            <div class="timeline-future">
+              <span>05</span>
+              <b>可能的 Closing the loop</b>
+              <em>设计、开发、训练后继模型</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="self-evidence-grid" aria-label="Anthropic 自进化方向证据">
+          <article>
+            <span>12h</span>
+            <h3>任务时间窗口变长</h3>
+            <p>Anthropic 引用外部趋势：AI 能可靠独立完成的任务时长约每 4 个月翻倍；示例从 2024 年约 4 分钟，到 2026 年约 12 小时。</p>
+          </article>
+          <article>
+            <span>80%+</span>
+            <h3>AI 参与代码合入</h3>
+            <p>截至 2026 年 5 月，Anthropic 称其合入代码中超过 80% 可归因于 Claude。这个数字是方向信号，不等同于质量。</p>
+          </article>
+          <article>
+            <span>8x</span>
+            <h3>工程产出被放大</h3>
+            <p>2026 年第二季度，典型工程师每天合入代码量约为 2024 年的 8 倍。代码行数不是生产力本身，但说明执行环节在加速。</p>
+          </article>
+          <article>
+            <span>800+</span>
+            <h3>长期问题被批量修复</h3>
+            <p>Claude 曾完成 800 多个修复，把一类 API 错误降低 1000 倍；过去“不值得做”的改善项，可能突然变得值得做。</p>
+          </article>
+        </div>
+
+        <div class="self-agent-loop" aria-label="对商家 Agent 的启发">
+          <div class="self-agent-copy">
+            <span class="section-kicker">Merchant Agent</span>
+            <h3>从“让 AI 做任务”，到“让 AI 改进任务系统”</h3>
+            <p>商家 Claw 下一阶段不只是回答商家问题，也可以让 AI 参与发现高频失败、归因能力缺口、生成评测样本、提出工具和评测改进建议，再由人审核进入系统迭代。</p>
+          </div>
+          <div class="self-agent-steps">
+            <span>商家 query</span>
+            <span>Agent 执行</span>
+            <span>失败 / 低分样本</span>
+            <span>AI 归因</span>
+            <span>生成 tool / eval 改进建议</span>
+            <span>人审核</span>
+            <span>系统升级</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="human" class="section section-band human-section">
+        <div class="section-title">
+          <p class="eyebrow">Part 3</p>
+          <h2>当智力可以被调度，人往哪里站？</h2>
+          <p>这不是一句“AI 替不替代人”的单选题。更重要的变化是：技能会被普及，能力会被调度，人的位置会从亲自执行迁移到定义目标、组织资源、验证结果和承担责任。</p>
+        </div>
+
+        <div class="human-intro">
+          <div class="human-thesis">
+            <h3>不是站在 AI 对面，而是站到任务上方</h3>
+            <p>
+              当某种能力从少数人掌握，变成更多人可以调用，它不会简单抹掉人的价值，而是重定价“什么才稀缺”。稀缺点会从“我会不会做”，迁移到“我能不能把更复杂的事组织起来”。
+            </p>
+            <div class="human-thesis-tags" aria-label="人的新站位">
+              <span>定目标</span>
+              <span>拆任务</span>
+              <span>验结果</span>
+              <span>担责任</span>
+            </div>
+          </div>
+          <div class="human-intro-points" aria-label="这一部分的三层递进">
+            <span>技能普及</span>
+            <span>能力调度</span>
+            <span>价值迁移</span>
+          </div>
+        </div>
+
+        <div class="human-stories" aria-label="两个核心类比">
+          <article class="human-story">
+            <div class="human-story-copy">
+              <span class="section-kicker">类比 01</span>
+              <h3>写字与代码：技能平权后，稀缺点会迁移</h3>
+              <p>写字普及后，代写书信不再是核心稀缺，但更好的文字工作者、编辑、叙事者出现了。代码能力被普及后，写代码本身也会被重新定价，但会有更多人用代码能力构建更大的系统。</p>
+              <div class="human-story-line">
+                <b>关键变化</b>
+                <span>从“会不会写”，迁移到“能不能表达清楚、组织复杂、验证结果”。</span>
+              </div>
+            </div>
+            <button class="human-visual expandable-shot" type="button" aria-label="放大查看写字与代码映射图">
+              <img src="./assets/human/language-code-mapping.png" alt="文字世界与代码世界的能力普及和价值迁移映射" />
+            </button>
+          </article>
+
+          <article class="human-story human-story-reverse">
+            <div class="human-story-copy">
+              <span class="section-kicker">类比 02</span>
+              <h3>工业革命与 AI：能力被调度后，规模会变大</h3>
+              <p>蒸汽机出现时，人们很难想象被集中调度的巨大力量会带来桥梁、高楼、工厂和现代工业。今天，智力也开始从个体身上部分抽离，变成可以组织和调度的资源。</p>
+              <div class="human-story-line">
+                <b>关键变化</b>
+                <span>AI 不是复制一个人的脑力，而是让大量智力像工业动力一样被组织起来。</span>
+              </div>
+            </div>
+            <button class="human-visual expandable-shot" type="button" aria-label="放大查看工业革命与 AI 调度图">
+              <img src="./assets/human/industrial-ai-power-mapping.png" alt="体力被调度与智力被调度带来不可预知繁荣的类比" />
+            </button>
+          </article>
+        </div>
+
+        <div class="human-close">
+          <div>
+            <span class="section-kicker">人的站位</span>
+            <h3>前线价值不在“抢着亲手做”，而在把 AI 结果带回真实经营</h3>
+            <p>商家信不信、动作能不能落地、什么时候该推、什么时候该停，这些判断来自关系、现场感和责任位置。AI 给的是候选路径，前线同学决定哪些路径值得被执行。</p>
+          </div>
+        </div>
+
+        <div class="human-actions" aria-label="面对 AI 的三个行动姿态">
+          <article>
+            <span>01</span>
+            <h3>贴着能力边界用</h3>
+            <p>不要用半年前的印象判断 AI。把最新能力放进真实问题里试，知道它现在能做到哪里，也知道哪里还不稳。</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>把问题拆成可委托任务</h3>
+            <p>把“帮商家变好”拆成看数据、找证据、生成方案、准备沟通、跟踪效果，让 AI 接住明确的工作单元。</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>把结果带回真实经营</h3>
+            <p>AI 给的是候选路径。最终要看商家是否采纳、经营是否改善、风险是否可控，这一步仍然需要人来判断。</p>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <div class="lightbox" hidden>
+      <button class="lightbox-close" aria-label="关闭预览">×</button>
+      <img alt="放大的截图" />
+    </div>
+
+    <script src="./app.js?v=20260611-expand"></script>
+  </body>
+</html>

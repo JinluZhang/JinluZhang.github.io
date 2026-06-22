@@ -1,0 +1,30 @@
+[
+  {
+    "key": "2764029464.simple-1",
+    "out": "web/assets/km-images/yuanxiang_generated_poster.png",
+    "status": 1,
+    "stdout": "",
+    "stderr": "🚀 正在通过鉴权下载图片并保存到本地...\n图片 URL：https://km.sankuai.com/api/file/cdn/2764029464/239773260566?contentType=1&isNewContent=false\n保存路径：web/assets/km-images/yuanxiang_generated_poster.png\n\n❌ 下载图片失败: HTTP 403 Forbidden (https://km.sankuai.com/api/file/cdn/2764029464/239773260566?contentType=1&isNewContent=false)\n"
+  },
+  {
+    "key": "2764029464.simple-2",
+    "out": "web/assets/km-images/yuanxiang_uploaded_poster.png",
+    "status": 1,
+    "stdout": "",
+    "stderr": "🚀 正在通过鉴权下载图片并保存到本地...\n图片 URL：https://km.sankuai.com/api/file/cdn/2764029464/239773260565?contentType=1&isNewContent=false\n保存路径：web/assets/km-images/yuanxiang_uploaded_poster.png\n\n❌ 下载图片失败: HTTP 403 Forbidden (https://km.sankuai.com/api/file/cdn/2764029464/239773260565?contentType=1&isNewContent=false)\n"
+  },
+  {
+    "key": "2764029464.simple-61",
+    "out": "web/assets/km-images/dijiu_sort_table_bug.png",
+    "status": 1,
+    "stdout": "",
+    "stderr": "🚀 正在通过鉴权下载图片并保存到本地...\n图片 URL：https://km.sankuai.com/api/file/cdn/2764029464/239059801016?contentType=1\n保存路径：web/assets/km-images/dijiu_sort_table_bug.png\n\n❌ 下载图片失败: HTTP 403 Forbidden (https://km.sankuai.com/api/file/cdn/2764029464/239059801016?contentType=1)\n"
+  },
+  {
+    "key": "2764029464.simple-62",
+    "out": "web/assets/km-images/dijiu_name_bug.png",
+    "status": 1,
+    "stdout": "",
+    "stderr": "🚀 正在通过鉴权下载图片并保存到本地...\n图片 URL：https://km.sankuai.com/api/file/cdn/2764029464/239057401486?contentType=1\n保存路径：web/assets/km-images/dijiu_name_bug.png\n\n❌ 下载图片失败: HTTP 403 Forbidden (https://km.sankuai.com/api/file/cdn/2764029464/239057401486?contentType=1)\n"
+  }
+]
